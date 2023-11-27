@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.tvTitulo.setText(objetoActual.getTitulo());
         holder.tvDireccion.setText(objetoActual.getUbicacion());
 
+        holder.ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                holder.tvRating.setText(String.valueOf(rating));
+            }
+        });
+
+
+
         // Establecer la imagen
         holder.imageN.setImageResource(objetoActual.getImagenId());
     }
@@ -64,15 +74,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+
         ImageView imageN;
         TextView tvTitulo;
         TextView tvDireccion;
+
+        TextView tvRating;
+        RatingBar ratingBar;
 
         ViewHolder(View itemView) {
             super(itemView);
             imageN = itemView.findViewById(R.id.imageN);
             tvTitulo = itemView.findViewById(R.id.tvTitulo);
             tvDireccion = itemView.findViewById(R.id.tvDireccion);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
+            tvRating = itemView.findViewById(R.id.tvRating);
         }
     }
 }
